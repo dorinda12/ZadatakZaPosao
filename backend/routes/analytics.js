@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const Analytics = require('../models/analyticModel')
+
 
 
 router.get('/total-cost/:month', (req, res) => {
