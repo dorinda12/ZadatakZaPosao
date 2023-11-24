@@ -1,10 +1,12 @@
 require('dotenv').config()
 
 const express = require('express')
+const mongoose = require('mongoose')
 
 const shoppingListRouter = require('./routes/shoppingList');
 const productsRouter = require('./routes/products');
 const analyticsRouter = require('./routes/analytics');
+
 
 
 //express app
@@ -21,7 +23,15 @@ app.use('/api/shoppingList' ,shoppingListRouter)
 app.use('/api/products', productsRouter)
 app.use('api/analytics', analyticsRouter)
 
+//connect to db
+mongoose.connect(process.env.MONGO_URI)
+    .then(()=>{
+        app.listen(process.env.PORT, ()=>{
+            console.log('connected to db & listeneing on port', process.env.PORT)
+        })
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
 
-app.listen(process.env.PORT, ()=>{
-    console.log('listeneing on port', process.env.PORT)
-})
+
