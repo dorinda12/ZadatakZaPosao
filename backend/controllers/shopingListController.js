@@ -114,8 +114,6 @@ const addProductToShoppingList = async (req, res) => {
 
 const getCategories = async (req, res) => {
   try {
-    // Pretpostavljamo da kategorije proizvoda imate spremljene u bazi podataka
-    // Zamijenite ovo s odgovarajućim pozivom bazi podataka
     const categories = await ProductCategory.find({}).sort({ name: 1 });
 
     res.status(200).json(categories);
@@ -128,7 +126,6 @@ const getProductsByCategory = async (req, res) => {
   const { categoryId } = req.params;
 
   try {
-    // Zamijenite ovo s odgovarajućim pozivom bazi podataka
     const products = await Product.find({ category: categoryId }).sort({ name: 1 });
 
     res.status(200).json(products);

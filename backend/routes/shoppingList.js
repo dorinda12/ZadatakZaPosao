@@ -22,7 +22,6 @@ router.get('/', getShoppingLists)
 
   router.get('/categories', getCategories);
 
-// Dohvat proizvoda po kategoriji
 router.get('/products/:categoryId', getProductsByCategory);
 
 module.exports = router

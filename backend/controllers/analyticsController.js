@@ -1,12 +1,11 @@
 const Product = require('../models/analyticModel')
 const mongoose = require('mongoose');
 
-// Get total cost for a specific month
 const getTotalCost = async (req, res) => {
   const selectedMonth = req.params.month;
 
   try {
-    // Replace the following code with your actual logic to calculate the total cost
+    
     const totalCost = await Analytics.aggregate([
       {
         $match: { month: selectedMonth },
@@ -25,12 +24,12 @@ const getTotalCost = async (req, res) => {
   }
 };
 
-// Get cost breakdown by category for a specific month
+
 const getCostBreakdown = async (req, res) => {
   const selectedMonth = req.params.month;
 
   try {
-    // Replace the following code with your actual logic to calculate the cost breakdown by category
+
     const costBreakdown = await Analytics.aggregate([
       {
         $match: { month: selectedMonth },
