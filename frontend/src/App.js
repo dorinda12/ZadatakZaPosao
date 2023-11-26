@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js or where you configure routes
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from '../src/pages/Home';
+import AddProductForm from '../src/pages/AddProductForm';
+import ProductsTable from '../src/pages/ProductsTable';
+import AddShoppingListForm from '../src/pages/CreateShoppingListForm';
+import ShoppingListsTable from '../src/pages/ShoppingListsTable';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/add-product" element={<AddProductForm />} />
+        <Route path="/products" element={<ProductsTable />} />
+        <Route path="/add-shopping-list" element={<AddShoppingListForm />} />
+        <Route path="/shopping-lists" element={<ShoppingListsTable />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
