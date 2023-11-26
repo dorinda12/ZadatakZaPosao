@@ -1,5 +1,5 @@
 const express = require('express')
-const {getShoppingLists, getShoppingList, createShoppingList, deleteShoppingList, updateShoppingList} = require('../controllers/shopingListController');
+const {getShoppingLists, getShoppingList, createShoppingList, deleteShoppingList, updateShoppingList, addProductToShoppingList,getCategories, getProductsByCategory } = require('../controllers/shopingListController');
 
 const router = express.Router()
 
@@ -17,6 +17,13 @@ router.get('/', getShoppingLists)
   
   // UPDATE a shopping list
   router.patch('/:id', updateShoppingList)
+
+  router.post('/:id/add-product', addProductToShoppingList);
+
+  router.get('/categories', getCategories);
+
+// Dohvat proizvoda po kategoriji
+router.get('/products/:categoryId', getProductsByCategory);
 
 module.exports = router
 

@@ -10,7 +10,7 @@ router.get('/', getProducts)
   router.get('/:id', getIndividualProduct)
   
   // POST a new product
-  router.post('/', createProduct)
+  router.post('/add', createProduct)
   
   // DELETE a product
   router.delete('/:id', deleteProduct)

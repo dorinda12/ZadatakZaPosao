@@ -79,10 +79,71 @@ const updateShoppingList = async (req, res) => {
   }
 };
 
+const addProductToShoppingList = async (req, res) => {
+  const shoppingListId = req.params.id;
+  const { productName, productPrice, productQuantity } = req.body;
+
+  try {
+    // Provjeri je li ID valjan
+    if (!mongoose.Types.ObjectId.isValid(shoppingListId)) {
+      return res.status(404).json({ error: 'Ne postoji takva shopping lista' });
+    }
+
+    // Provjeri postoji li shopping lista
+    const shoppingList = await ShoppingList.findById(shoppingListId);
+
+    if (!shoppingList) {
+      return res.status(404).json({ error: 'Ne postoji takva shopping lista' });
+    }
+
+    // Dodaj proizvod u listu
+    const newProduct = {
+      name: productName,
+      price: productPrice,
+      quantity: productQuantity,
+    };
+
+    shoppingList.products.push(newProduct);
+    const updatedShoppingList = await shoppingList.save();
+
+    res.status(200).json(updatedShoppingList);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getCategories = async (req, res) => {
+  try {
+    // Pretpostavljamo da kategorije proizvoda imate spremljene u bazi podataka
+    // Zamijenite ovo s odgovarajućim pozivom bazi podataka
+    const categories = await ProductCategory.find({}).sort({ name: 1 });
+
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getProductsByCategory = async (req, res) => {
+  const { categoryId } = req.params;
+
+  try {
+    // Zamijenite ovo s odgovarajućim pozivom bazi podataka
+    const products = await Product.find({ category: categoryId }).sort({ name: 1 });
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getShoppingLists,
   getShoppingList,
   createShoppingList,
   deleteShoppingList,
   updateShoppingList,
+  addProductToShoppingList,
+  getCategories,
+  getProductsByCategory
 };
